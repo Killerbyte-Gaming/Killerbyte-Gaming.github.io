@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 # Your verified YouTube channel identifier string
-CHANNEL_ID = "UCmK_fO3S_xS96w95f5_tIug"
+CHANNEL_ID = "UCpAoQMXFb5Zq7d7egXOjveg"
 url = f"https://youtube.com/channel/{CHANNEL_ID}"
 
 try:
