@@ -12,7 +12,8 @@ title: home
     <div class="video-card">
       <a href="{{ video.link }}" target="_blank" rel="noopener noreferrer">
         <div class="thumbnail-wrapper">
-          <img src="https://youtube.com{{ video.id }}/mqdefault.jpg" alt="{{ video.title | escape }}">
+          <!-- Swapped to a direct video.id fallback source -->
+          <img src="https://ytimg.com{{ video.id }}/hqdefault.jpg" alt="{{ video.title | escape }}">
         </div>
         <div class="video-info">
           <h4>{{ video.title }}</h4>

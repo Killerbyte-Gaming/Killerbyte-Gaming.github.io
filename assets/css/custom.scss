@@ -28,8 +28,9 @@
 .thumbnail-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* Enforces 16:9 gaming format proportions */
+  padding-top: 56.25%; /* Forces 16:9 widescreen ratio box */
   background: #000;
+  display: block; /* Guarantees it doesn't collapse to 0 height */
 
   img {
     position: absolute;
