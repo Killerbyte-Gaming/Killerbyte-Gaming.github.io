@@ -29,7 +29,7 @@ title: home
     <div class="shorts-card">
       <a href="{{ short.link }}" target="_blank" rel="noopener noreferrer">
         <div class="short-thumbnail-wrapper">
-          <img src="https://ytimg.com{{ short.id }}/hqdefault.jpg" alt="{{ short.title | escape }}">
+          <img src="https://i.ytimg.com/vi/{{ short.id }}/hqdefault.jpg" alt="{{ short.title | escape }}">
         </div>
         <div class="video-info">
           <h4>{{ short.title }}</h4>
