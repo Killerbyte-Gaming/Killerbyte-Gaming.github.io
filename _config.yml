@@ -45,3 +45,9 @@ exclude:
   - process_media.py
   - .jekyll-cache/
   - .jekyll-metadata
+
+# Ensure markdown parser allows raw HTML elements to compile smoothly
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
