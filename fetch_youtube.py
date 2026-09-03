@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-# FIXED: Hardcoded your working URL directly to prevent string template bugs
+# Your verified YouTube channel identifier string
 url = "https://youtube.com"
 
 try:
@@ -30,8 +30,8 @@ try:
         data = json.loads(line)
         
         video_id = data.get("id")
-        title = data.get("title")
-        duration = data.get("duration") # Duration is returned in seconds
+        title = data.get("title", "")
+        duration = data.get("duration")
         
         video_entry = {
             "id": video_id,
@@ -39,14 +39,21 @@ try:
             "link": f"https://youtube.com{video_id}"
         }
         
-        # Smart Filtering Logic: 
-        # YouTube Shorts are explicitly capped at a maximum duration of 60 seconds.
+        # SMART DUAL-FILTERING LOGIC:
+        # 1. Check if duration explicitly registers as a short form (under 60 seconds)
+        # 2. Fall back to title checking if duration data is stripped by YouTube's cloud block filters
+        is_short = False
         if duration and duration <= 60:
+            is_short = True
+        elif "#shorts" in title.lower() or "short" in title.lower():
+            is_short = True
+            
+        if is_short:
             shorts_videos.append(video_entry)
         else:
             long_form_videos.append(video_entry)
             
-    # Cap both collections to clear layout space
+    # Cap both collections to clear layout space on the front page
     long_form_videos = long_form_videos[:6]
     shorts_videos = shorts_videos[:6]
         
