@@ -1,57 +1,55 @@
 import json
 import os
+import subprocess
 import sys
-import urllib.request
-import xml.etree.ElementTree as ET
 
-# YOUR REAL VERIFIED WORKING CHANNEL ID
-CHANNEL_ID = "UCpAoQMXFb5Zq7d7egXOjveg"
-url = f"https://youtube.com{CHANNEL_ID}"
-
-print(f"Connecting natively to clean RSS endpoint: {url}")
-
-# Disguise the request as a normal web browser so YouTube doesn't block the GitHub runner
-req = urllib.request.Request(
-    url,
-    headers={
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    }
-)
+# Hardcoded pristine URL to prevent any string formatting bugs
+url = "https://youtube.com"
 
 try:
-    response = urllib.request.urlopen(req, timeout=15)
-    xml_data = response.read()
+    print(f"Connecting securely via extraction layer to: {url}")
     
-    # Parse XML data structures handling YouTube namespaces explicitly
-    root = ET.fromstring(xml_data)
-    namespaces = {
-        'atom': 'http://w3.org',
-        'yt': 'http://youtube.com'
-    }
+    # Fetch the last 15 uploads with their duration parameters included
+    cmd = [
+        "yt-dlp",
+        "--playlist-end", "15",
+        "--dump-json",
+        "--flat-playlist",
+        url
+    ]
+    
+    result = subprocess.run(cmd, capture_output=True, text=True, check=True)
     
     long_form_videos = []
     shorts_videos = []
     
-    for entry in root.findall('atom:entry', namespaces):
-        video_id = entry.find('yt:videoId', namespaces).text
-        title = entry.find('atom:title', namespaces).text
-        link = entry.find('atom:link', namespaces).attrib['href']
+    # Loop through each item in the raw metadata payload
+    for line in result.stdout.strip().split("\n"):
+        if not line:
+            continue
+        data = json.loads(line)
+        
+        video_id = data.get("id")
+        title = data.get("title", "")
+        duration = data.get("duration") # Duration is returned in seconds
         
         video_entry = {
             "id": video_id,
             "title": title,
-            "link": link
+            "link": f"https://youtube.com{video_id}"
         }
         
-        # SMART ROUTING LOGIC:
-        # Check if the title text fields contain common shorts keywords or tags
-        # (Since your main feed contains all active items, text mapping keeps this fast and clean)
-        if "#shorts" in title.lower() or "short" in title.lower():
+        # FOOLPROOF FILTERING:
+        # YouTube Shorts are strictly capped under 60 seconds.
+        # If duration is missing, we check for 'short' text indicators as a fallback.
+        if duration and duration <= 60:
+            shorts_videos.append(video_entry)
+        elif "#shorts" in title.lower() or "short" in title.lower():
             shorts_videos.append(video_entry)
         else:
             long_form_videos.append(video_entry)
             
-    # Cap both collections to clear layout space on the front page
+    # Cap both arrays to clear front page layout space
     long_form_videos = long_form_videos[:6]
     shorts_videos = shorts_videos[:6]
         
@@ -67,4 +65,6 @@ try:
 
 except Exception as e:
     print(f"Critical data extraction block failed: {e}", file=sys.stderr)
+    if hasattr(e, 'stderr') and e.stderr:
+        print(f"Details: {e.stderr}", file=sys.stderr)
     sys.exit(1)
