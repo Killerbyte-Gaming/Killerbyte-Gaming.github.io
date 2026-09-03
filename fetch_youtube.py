@@ -4,12 +4,12 @@ import sys
 import urllib.request
 import xml.etree.ElementTree as ET
 
-# FIXED: Explicitly targeting the official RSS xml subpath gate
-url = "https://youtube.com"
+# TARGET PATH: Explicitly hardcoded to the clean RSS gate endpoint
+url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCpAoQMXFb5Zq7d7egXOjveg"
 
 print(f"Connecting natively to clean RSS endpoint: {url}")
 
-# Disguise the request as a normal mobile browser to bypass datacenter blocking walls
+# Disguise the request as a mobile browser to bypass datacenter blocks
 req = urllib.request.Request(
     url,
     headers={
@@ -21,7 +21,7 @@ try:
     response = urllib.request.urlopen(req, timeout=15)
     xml_data = response.read()
     
-    # Parse XML data structures handling YouTube namespaces explicitly
+    # Parse the XML payload using the official global YouTube schemas
     root = ET.fromstring(xml_data)
     namespaces = {
         'atom': 'http://w3.org',
@@ -31,6 +31,7 @@ try:
     long_form_videos = []
     shorts_videos = []
     
+    # Loop through each upload entry in the feed
     for entry in root.findall('atom:entry', namespaces):
         video_id = entry.find('yt:videoId', namespaces).text
         title = entry.find('atom:title', namespaces).text
@@ -42,14 +43,13 @@ try:
             "link": link
         }
         
-        # SMART ROUTING FALLBACK:
-        # Categorises clips containing specific short-form terms into shorts.json
+        # Categorise into shorts if the title contains short-form tracking tags
         if "#shorts" in title.lower() or "short" in title.lower():
             shorts_videos.append(video_entry)
         else:
             long_form_videos.append(video_entry)
             
-    # Cap both collections to clear layout space on your homepage
+    # Keep the counts clean to match your front-end spacing
     long_form_videos = long_form_videos[:6]
     shorts_videos = shorts_videos[:6]
         
