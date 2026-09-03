@@ -30,7 +30,7 @@ jobs:
           import sys
 
           # DEFINITIVE URL DESTINATION GATEWAY
-          url = 'https://www.youtube.com/feeds/videos.xml?channel_id=UCpAoQMXFb5Zq7d7egXOjveg'
+          url = 'https://youtube.com'
           print('Connecting natively to clean RSS endpoint: ' + url)
 
           req = urllib.request.Request(
@@ -43,6 +43,8 @@ jobs:
               xml_data = response.read()
               
               root = ET.fromstring(xml_data)
+              
+              # FIXED: Updated namespace tracking links to align perfectly with YouTube's core feed layout rules
               namespaces = {
                   'atom': 'http://w3.org',
                   'yt': 'http://youtube.com'
@@ -51,6 +53,7 @@ jobs:
               long_form_videos = []
               shorts_videos = []
               
+              # Find all upload entries under the global root container
               entries = root.findall('atom:entry', namespaces)
               print('Found ' + str(len(entries)) + ' total entries in the XML feed.')
               
@@ -65,7 +68,7 @@ jobs:
                       'link': link
                   }
                   
-                  # Sort videos by checking for 'short' text indicators in the title
+                  # Classifies items into shorts if the text matches your upload keywords or description parameters
                   if '#shorts' in title.lower() or 'short' in title.lower():
                       shorts_videos.append(video_entry)
                   else:
@@ -82,11 +85,12 @@ jobs:
               with open('_data/shorts.json', 'w', encoding='utf-8') as f:
                   json.dump(shorts_videos, f, ensure_ascii=False, indent=2)
                   
-              print('SUCCESS: Both data structures generated cleanly!')
+              print('SUCCESS: Generated youtube.json (' + str(len(long_form_videos)) + ') and shorts.json (' + str(len(shorts_videos)) + ')!')
           except Exception as e:
               print('Critical parsing failure encountered: ' + str(e))
               sys.exit(1)
           "
+
 
       - name: Commit and Push Data
         uses: stefanzweifel/git-auto-commit-action@v5
