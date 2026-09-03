@@ -100,6 +100,45 @@ title: home
     box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3) !important;
   }
 
+    /* Twitch Purple Accent Style */
+  .twitch-btn {
+    background-color: #18141c !important;
+    color: #9146ff !important;
+    border-color: #9146ff !important;
+  }
+  .twitch-btn:hover {
+    background-color: #9146ff !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(145, 70, 255, 0.4) !important;
+  }
+
+  /* TikTok Sleek Dark Cyan Accent Style */
+  .tiktok-btn {
+    background-color: #010101 !important;
+    color: #25f4ee !important;
+    border-color: #fe2c55 !important;
+  }
+  .tiktok-btn:hover {
+    background-color: #fe2c55 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(254, 44, 85, 0.4) !important;
+  }
+
+  /* Instagram Gradient Blend Accent Style */
+  .instagram-btn {
+    background-color: #12060c !important;
+    color: #e1306c !important;
+    border-color: #f77737 !important;
+  }
+  .instagram-btn:hover {
+    background-color: #e1306c !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4) !important;
+  }
+
 </style>
 
 
@@ -137,11 +176,19 @@ title: home
 
 <h3 class="feed-title">Connect with Killerbyte Gaming</h3>
 <div class="social-link-block">
-  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn youtube-btn">
+  <a href="https://youtube.com/@killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="social-btn youtube-btn">
     YouTube
   </a>
-  <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-btn twitter-btn">
+  <a href="https://x.com/killerbytegame" target="_blank" rel="noopener noreferrer" class="social-btn twitter-btn">
     Twitter / X
   </a>
-  <!-- You can duplicate this line below to add Twitch, Discord, etc. -->
+  <a href="https://twitch.tv/killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="social-btn twitch-btn">
+    Twitch
+  </a>
+  <a href="https://tiktok.com/killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="social-btn tiktok-btn">
+    TikTok
+  </a>
+  <a href="https://instagram.com/killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="social-btn instagram-btn">
+    Instagram
+  </a>
 </div>
