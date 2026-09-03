@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 5%;
+    --foreground: 0 0% 94%;
+    --card: 210 20% 8%;
+    --card-foreground: 0 0% 94%;
+    --popover: 210 20% 8%;
+    --popover-foreground: 0 0% 94%;
+    --primary: 43 74% 53%;
+    --primary-foreground: 210 20% 5%;
+    --secondary: 38 36% 76%;
+    --secondary-foreground: 210 20% 5%;
+    --muted: 210 16% 12%;
+    --muted-foreground: 38 20% 62%;
+    --accent: 187 100% 41%;
+    --accent-foreground: 210 20% 5%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 94%;
+    --border: 38 26% 24%;
+    --input: 38 26% 24%;
+    --ring: 43 74% 53%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --font-heading: "Cinzel Decorative", ui-serif, Georgia, serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Cinzel Decorative", ui-serif, Georgia, serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+
+  ::selection {
+    background: hsl(43 74% 53% / 0.3);
+    color: hsl(0 0% 100%);
+  }
+  }
+
+  @layer components {
+  .font-heading { font-family: var(--font-heading); }
+  .font-display { font-family: var(--font-display); }
+  .font-mono-ui { font-family: var(--font-mono); }
+
+  /* Chiseled stone border — tactile container stroke */
+  .border-chisel {
+    border: 1px solid hsl(var(--border));
+    box-shadow:
+      inset 0 1px 0 hsl(43 74% 53% / 0.12),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.5),
+      0 4px 14px rgba(0, 0, 0, 0.45);
+  }
+
+  .text-gilded {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 18px hsl(43 74% 53% / 0.35);
+  }
+
+  .tracking-inscription {
+    letter-spacing: 0.2em;
+  }
+
+  /* Level-up materialize animation */
+  .materialize {
+    animation: materialize 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes materialize {
+    0% { opacity: 0; transform: translateY(18px); filter: brightness(0.4); }
+    60% { filter: brightness(1.4); }
+    100% { opacity: 1; transform: translateY(0); filter: brightness(1); }
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      hsl(43 74% 70% / 0.5) 50%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.4s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Torch flicker for live indicator */
+  .torch-flicker {
+    animation: torch 2.2s ease-in-out infinite;
+  }
+  @keyframes torch {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px hsl(187 100% 60%)); }
+    45% { opacity: 0.7; filter: drop-shadow(0 0 14px hsl(187 100% 65%)); }
+    70% { opacity: 0.92; filter: drop-shadow(0 0 9px hsl(187 100% 55%)); }
+  }
+
+  .rare-drop-glow {
+    animation: rareDrop 1.6s ease-in-out infinite;
+  }
+  @keyframes rareDrop {
+    0%, 100% { box-shadow: inset 0 0 0 1px hsl(43 74% 53% / 0.25), 0 0 0 0 hsl(43 74% 70% / 0); }
+    50% { box-shadow: inset 0 0 0 1px hsl(43 74% 70% / 0.6), 0 0 28px 2px hsl(43 74% 60% / 0.25); }
+  }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: hsl(210 20% 5%); }
+  ::-webkit-scrollbar-thumb {
+  background: hsl(38 26% 24%);
+  border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(43 40% 40%); }
