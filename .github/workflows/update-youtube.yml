@@ -2,8 +2,8 @@ name: Fetch Recent YouTube Uploads
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Runs automatically every 6 hours
-  workflow_dispatch: # Allows manual trigger testing
+    - cron: '0 */6 * * *' # Automatically runs every 6 hours
+  workflow_dispatch: # Allows manual trigger testing via the Actions tab
 
 permissions:
   contents: write
@@ -15,15 +15,57 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Fetch YouTube RSS Feed
-        uses: Promptly-Technologies-LLC/rss-fetch-action@v2
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          # Replace UCxxxxxxxxx with your true 24-character YouTube Channel ID
-          feed_url: 'https://youtube.com/channel/UCpAoQMXFb5Zq7d7egXOjveg'
-          output_path: './_data/youtube.json'
+          python-version: '3.x'
 
-      - name: Commit and Push to Site
+      - name: Fetch and Parse YouTube Feed via Python
+        run: |
+          python -c "
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          import json
+          import os
+
+          url = 'https://youtube.com/channel/UCpAoQMXFb5Zq7d7egXOjveg'
+          try:
+              # Securely grab the raw XML feed over HTTPS
+              response = urllib.request.urlopen(url)
+              xml_data = response.read()
+              
+              # Parse the XML payload safely handling namespaces
+              root = ET.fromstring(xml_data)
+              namespaces = {
+                  'atom': 'http://w3.org',
+                  'yt': 'http://youtube.com'
+              }
+              
+              videos = []
+              # Extract details for each recent upload
+              for entry in root.findall('atom:entry', namespaces):
+                  video_id = entry.find('yt:videoId', namespaces).text
+                  title = entry.find('atom:title', namespaces).text
+                  link = entry.find('atom:link', namespaces).attrib['href']
+                  
+                  videos.append({
+                      'id': video_id,
+                      'title': title,
+                      'link': link
+                  })
+              
+              # Build the _data directory if missing and drop clean JSON entries
+              os.makedirs('_data', exist_ok=True)
+              with open('_data/youtube.json', 'w', encoding='utf-8') as f:
+                  json.dump(videos, f, ensure_ascii=False, indent=2)
+              print('Successfully generated _data/youtube.json data payload.')
+          except Exception as e:
+              print(f'Critical parsing failure encountered: {e}')
+              exit(1)
+          "
+
+      - name: Commit and Push Data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Automated Update: Synced latest YouTube videos'
+          commit_message: 'Automated Update: Synced latest YouTube videos via internal python step'
           file_pattern: '_data/youtube.json'
