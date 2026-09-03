@@ -1,0 +1,29 @@
+name: Fetch Recent YouTube Uploads
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Automatically updates every 6 hours
+  workflow_dispatch: # Allows you to manually click "Run workflow" to test it instantly
+
+permissions:
+  contents: write # Allows the script to save data to your repository
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Fetch YouTube RSS Feed
+        uses: Promptly-Technologies-LLC/rss-fetch-action@v2
+        with:
+          # Replace UCxxxxxxxxx with your actual 24-character YouTube Channel ID
+          feed_url: 'https://youtube.com'
+          file_path: './_data/youtube.json'
+
+      - name: Commit and Push to Site
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Automated Update: Synced latest YouTube videos'
+          file_pattern: '_data/youtube.json'
