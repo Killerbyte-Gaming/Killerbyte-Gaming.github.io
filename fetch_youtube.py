@@ -5,7 +5,7 @@ import sys
 
 # Your verified YouTube channel identifier string
 CHANNEL_ID = "UCmK_fO3S_xS96w95f5_tIug"
-url = f"https://youtube.com/{CHANNEL_ID}"
+url = f"https://youtube.com/channel/{CHANNEL_ID}"
 
 try:
     print(f"Extracting video list from: {url}")
