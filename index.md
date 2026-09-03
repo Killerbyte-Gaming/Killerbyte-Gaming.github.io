@@ -22,3 +22,19 @@ title: home
     </div>
   {% endfor %}
 </div>
+
+<h3 class="feed-title">Latest Shorts</h3>
+<div class="shorts-grid">
+  {% for short in site.data.shorts limit: 4 %}
+    <div class="shorts-card">
+      <a href="{{ short.link }}" target="_blank" rel="noopener noreferrer">
+        <div class="short-thumbnail-wrapper">
+          <img src="https://ytimg.com{{ short.id }}/hqdefault.jpg" alt="{{ short.title | escape }}">
+        </div>
+        <div class="video-info">
+          <h4>{{ short.title }}</h4>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
