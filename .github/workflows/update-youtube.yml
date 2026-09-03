@@ -10,8 +10,7 @@ permissions:
 
 jobs:
   update-feed:
-    # Explicitly targeting the stable 24.04 image forces a clean system route
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -21,12 +20,15 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install Video Extraction Packages
+        # THIS IS THE CRITICAL MISSING STEP: Installs the yt-dlp engine onto the Linux runner
+        run: pip install yt-dlp
+
       - name: Fetch and Parse YouTube Feed via Python File
-        run: python fetch_youtube.py # Completely clean execution without yt-dlp dependencies
+        run: python fetch_youtube.py
 
       - name: Commit and Push Data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Automated Update: Synced latest YouTube longform and shorts datasets'
+          commit_message: 'Automated Update: Synced latest YouTube longform and shorts feeds'
           file_pattern: '_data/*.json'
-

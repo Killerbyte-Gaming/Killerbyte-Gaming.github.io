@@ -3,7 +3,6 @@ import os
 import subprocess
 import sys
 
-# Hardcoded pristine URL to prevent any string formatting bugs
 url = "https://youtube.com"
 
 try:
@@ -23,7 +22,6 @@ try:
     long_form_videos = []
     shorts_videos = []
     
-    # Loop through each item in the raw metadata payload
     for line in result.stdout.strip().split("\n"):
         if not line:
             continue
@@ -39,9 +37,8 @@ try:
             "link": f"https://youtube.com{video_id}"
         }
         
-        # FOOLPROOF FILTERING:
-        # YouTube Shorts are strictly capped under 60 seconds.
-        # If duration is missing, we check for 'short' text indicators as a fallback.
+        # Smart Filter Tuning:
+        # Sorts short clips under 60 seconds or containing 'short' hashtags into shorts.json
         if duration and duration <= 60:
             shorts_videos.append(video_entry)
         elif "#shorts" in title.lower() or "short" in title.lower():
@@ -49,7 +46,6 @@ try:
         else:
             long_form_videos.append(video_entry)
             
-    # Cap both arrays to clear front page layout space
     long_form_videos = long_form_videos[:6]
     shorts_videos = shorts_videos[:6]
         
