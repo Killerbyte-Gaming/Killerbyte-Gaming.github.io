@@ -10,7 +10,8 @@ permissions:
 
 jobs:
   update-feed:
-    runs-on: ubuntu-latest
+    # Explicitly targeting the stable 24.04 image forces a clean system route
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
