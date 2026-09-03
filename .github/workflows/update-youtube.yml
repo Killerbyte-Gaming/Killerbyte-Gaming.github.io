@@ -15,13 +15,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Fetch YouTube XML Feed
-        uses: suisei-cn/actions-rss-feed@v1
+      - name: Fetch YouTube RSS Feed
+        uses: Promptly-Technologies-LLC/rss-fetch-action@v2
         with:
           # Replace UCxxxxxxxxx with your true 24-character YouTube Channel ID
           feed_url: 'https://youtube.com/channel/UCpAoQMXFb5Zq7d7egXOjveg'
           output_path: './_data/youtube.json'
-          format: 'json'
 
       - name: Commit and Push to Site
         uses: stefanzweifel/git-auto-commit-action@v5
