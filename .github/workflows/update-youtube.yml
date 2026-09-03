@@ -2,11 +2,11 @@ name: Fetch Recent YouTube Uploads
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Automatically updates every 6 hours
-  workflow_dispatch: # Allows you to manually click "Run workflow" to test it instantly
+    - cron: '0 */6 * * *' # Runs automatically every 6 hours
+  workflow_dispatch: # Allows manual trigger testing
 
 permissions:
-  contents: write # Allows the script to save data to your repository
+  contents: write
 
 jobs:
   update-feed:
@@ -15,12 +15,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Fetch YouTube RSS Feed
-        uses: Promptly-Technologies-LLC/rss-fetch-action@v2
+      - name: Fetch YouTube XML Feed
+        uses: suisei-cn/actions-rss-feed@v1
         with:
-          # Replace UCxxxxxxxxx with your actual 24-character YouTube Channel ID
-          feed_url: 'https://youtube.com'
-          file_path: './_data/youtube.json'
+          # Replace UCxxxxxxxxx with your true 24-character YouTube Channel ID
+          feed_url: 'https://youtube.com/channel/UCpAoQMXFb5Zq7d7egXOjveg'
+          output_path: './_data/youtube.json'
+          format: 'json'
 
       - name: Commit and Push to Site
         uses: stefanzweifel/git-auto-commit-action@v5
