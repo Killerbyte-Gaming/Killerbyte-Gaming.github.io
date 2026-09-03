@@ -5,13 +5,14 @@ import sys
 
 # Your verified YouTube channel identifier string
 CHANNEL_ID = "UCpAoQMXFb5Zq7d7egXOjveg"
-url = f"https://youtube.com{CHANNEL_ID}"
+
+# FIXED: Statically formatted the full, pristine channel path link
+url = "https://youtube.com/channel/{CHANNEL_ID}"
 
 try:
     print(f"Connecting securely via extraction layer to: {url}")
     
     # Execute a clean command to fetch metadata for your last 15 uploads
-    # --flat-playlist speeds up extraction massively by skipping deep video metadata parsing
     cmd = [
         "yt-dlp",
         "--playlist-end", "15",
@@ -38,7 +39,7 @@ try:
         video_entry = {
             "id": video_id,
             "title": title,
-            "link": f"https://www.youtube.com/watch?v={video_id}"
+            "link": f"https://youtube.com/{video_id}"
         }
         
         # Smart Filtering Logic: 
