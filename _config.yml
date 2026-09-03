@@ -30,7 +30,7 @@ twitter_username: killerbytegame
 github_username:  jekyll
 
 # Build settings
-remote_theme: jekyll/jekyll-theme-hacker
+remote_theme: jekyll-theme-hacker
 plugins:
   - jekyll-remote-theme
   - jekyll-feed
