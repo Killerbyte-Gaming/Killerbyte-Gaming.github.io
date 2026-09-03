@@ -12,8 +12,7 @@ title: home
     <div class="video-card">
       <a href="{{ video.link }}" target="_blank" rel="noopener noreferrer">
         <div class="thumbnail-wrapper">
-          <!-- FIXED: Restored the mandatory i. subdomain and /vi/ path segment -->
-          <img src="https://i.ytimg.com/vi/{{ video.id }}/hqdefault.jpg" alt="{{ video.title | escape }}">
+          <img src="https://ytimg.com{{ video.id }}/hqdefault.jpg" alt="{{ video.title | escape }}">
         </div>
         <div class="video-info">
           <h4>{{ video.title }}</h4>
@@ -29,7 +28,7 @@ title: home
     <div class="shorts-card">
       <a href="{{ short.link }}" target="_blank" rel="noopener noreferrer">
         <div class="short-thumbnail-wrapper">
-          <img src="https://i.ytimg.com/vi/{{ short.id }}/hqdefault.jpg" alt="{{ short.title | escape }}">
+          <img src="https://ytimg.com{{ short.id }}/hqdefault.jpg" alt="{{ short.title | escape }}">
         </div>
         <div class="video-info">
           <h4>{{ short.title }}</h4>
