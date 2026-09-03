@@ -3,11 +3,8 @@ import os
 import subprocess
 import sys
 
-# Your verified YouTube channel identifier string
-CHANNEL_ID = "UCpAoQMXFb5Zq7d7egXOjveg"
-
-# FIXED: Statically formatted the full, pristine channel path link
-url = "https://youtube.com/channel/{CHANNEL_ID}"
+# FIXED: Hardcoded your working URL directly to prevent string template bugs
+url = "https://youtube.com"
 
 try:
     print(f"Connecting securely via extraction layer to: {url}")
@@ -39,7 +36,7 @@ try:
         video_entry = {
             "id": video_id,
             "title": title,
-            "link": f"https://youtube.com/{video_id}"
+            "link": f"https://youtube.com{video_id}"
         }
         
         # Smart Filtering Logic: 
