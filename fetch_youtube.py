@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 
 # YOUR REAL VERIFIED WORKING CHANNEL ID
 CHANNEL_ID = "UCpAoQMXFb5Zq7d7egXOjveg"
-url = f"https://youtube.com{CHANNEL_ID}"
+url = f"https://youtube.com/channel/{CHANNEL_ID}"
 
 print(f"Connecting natively to clean RSS endpoint: {url}")
 
