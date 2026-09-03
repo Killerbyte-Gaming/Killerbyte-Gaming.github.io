@@ -6,6 +6,38 @@ layout: default
 title: home
 ---
 
+<style>
+  /* Shunts the desktop layout to use more compact sizing rules */
+  .video-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+    gap: 15px !important;
+  }
+  
+  .shorts-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)) !important;
+    gap: 12px !important;
+  }
+  
+  /* Restores explicit widescreen boundaries to prevent layout stretching */
+  .thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25% !important;
+    background: #000;
+    display: block !important;
+  }
+  
+  .short-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 177.77% !important;
+    background: #000;
+    display: block !important;
+  }
+</style>
+
 <h3 class="feed-title">Latest Videos</h3>
 <div class="video-grid">
   {% for video in site.data.youtube limit: 3 %}
