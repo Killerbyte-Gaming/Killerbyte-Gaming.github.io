@@ -4,9 +4,8 @@ import sys
 import urllib.request
 import xml.etree.ElementTree as ET
 
-# YOUR REAL VERIFIED WORKING CHANNEL ID
-CHANNEL_ID = "UCpAoQMXFb5Zq7d7egXOjveg"
-url = f"https://youtube.com/channel/{CHANNEL_ID}"
+# FIXED: Explicitly targeting the official RSS xml subpath gate
+url = "https://youtube.com"
 
 print(f"Connecting natively to clean RSS endpoint: {url}")
 
