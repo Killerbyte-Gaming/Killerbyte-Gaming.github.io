@@ -1,55 +1,70 @@
 import json
 import os
-import subprocess
 import sys
+import urllib.request
+import xml.etree.ElementTree as ET
 
-# TARGET MATCH: Direct, hardcoded layout links targeting your specific streams natively
-targets = {
-    "youtube": "https://youtube.com",
-    "shorts": "https://youtube.com"
-}
+# YOUR REAL VERIFIED WORKING CHANNEL ID
+CHANNEL_ID = "UCpAoQMXFb5Zq7d7egXOjveg"
+url = f"https://youtube.com{CHANNEL_ID}"
+
+print(f"Connecting natively to clean RSS endpoint: {url}")
+
+# Disguise the request as a normal web browser so YouTube doesn't block the GitHub runner
+req = urllib.request.Request(
+    url,
+    headers={
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    }
+)
 
 try:
+    response = urllib.request.urlopen(req, timeout=15)
+    xml_data = response.read()
+    
+    # Parse XML data structures handling YouTube namespaces explicitly
+    root = ET.fromstring(xml_data)
+    namespaces = {
+        'atom': 'http://w3.org',
+        'yt': 'http://youtube.com'
+    }
+    
+    long_form_videos = []
+    shorts_videos = []
+    
+    for entry in root.findall('atom:entry', namespaces):
+        video_id = entry.find('yt:videoId', namespaces).text
+        title = entry.find('atom:title', namespaces).text
+        link = entry.find('atom:link', namespaces).attrib['href']
+        
+        video_entry = {
+            "id": video_id,
+            "title": title,
+            "link": link
+        }
+        
+        # SMART ROUTING LOGIC:
+        # Check if the title text fields contain common shorts keywords or tags
+        # (Since your main feed contains all active items, text mapping keeps this fast and clean)
+        if "#shorts" in title.lower() or "short" in title.lower():
+            shorts_videos.append(video_entry)
+        else:
+            long_form_videos.append(video_entry)
+            
+    # Cap both collections to clear layout space on the front page
+    long_form_videos = long_form_videos[:6]
+    shorts_videos = shorts_videos[:6]
+        
     os.makedirs("_data", exist_ok=True)
     
-    for key, url in targets.items():
-        print(f"Connecting securely to {key} playlist: {url}")
+    with open("_data/youtube.json", "w", encoding="utf-8") as f:
+        json.dump(long_form_videos, f, ensure_ascii=False, indent=2)
         
-        # Pull down the last 6 entries from this specific feed layer
-        cmd = [
-            "yt-dlp",
-            "--playlist-end", "6",
-            "--dump-json",
-            "--flat-playlist",
-            url
-        ]
+    with open("_data/shorts.json", "w", encoding="utf-8") as f:
+        json.dump(shorts_videos, f, ensure_ascii=False, indent=2)
         
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        
-        videos = []
-        for line in result.stdout.strip().split("\n"):
-            if not line:
-                continue
-            data = json.loads(line)
-            
-            video_id = data.get("id")
-            if video_id:
-                videos.append({
-                    "id": video_id,
-                    "title": data.get("title", ""),
-                    "link": f"https://youtube.com/{video_id}"
-                })
-        
-        # Save the dataset to its respective json file
-        with open(f"_data/{key}.json", "w", encoding="utf-8") as f:
-            json.dump(videos, f, ensure_ascii=False, indent=2)
-            
-        print(f"SUCCESS: Generated _data/{key}.json with {len(videos)} entries.")
-
-    print("Automation build sequence complete!")
+    print(f"SUCCESS: Generated _data/youtube.json ({len(long_form_videos)}) and _data/shorts.json ({len(shorts_videos)})!")
 
 except Exception as e:
     print(f"Critical data extraction block failed: {e}", file=sys.stderr)
-    if hasattr(e, 'stderr') and e.stderr:
-        print(f"Details: {e.stderr}", file=sys.stderr)
     sys.exit(1)
