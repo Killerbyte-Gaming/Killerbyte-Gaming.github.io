@@ -20,60 +20,11 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Fetch and Parse YouTube Feed via Python
-        run: |
-          python -c "
-          import urllib.request
-          import xml.etree.ElementTree as ET
-          import json
-          import os
-
-          # CORRECT PATH: Point directly to the official RSS feed using your Channel ID
-          url = 'https://youtube.com'
-          
-          # Add a desktop browser header to bypass automated traffic filters
-          req = urllib.request.Request(
-              url, 
-              headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
-          )
-
-          try:
-              # Download the actual raw XML data stream
-              response = urllib.request.urlopen(req)
-              xml_data = response.read()
-              
-              # Parse the XML payload using the official global YouTube schemas
-              root = ET.fromstring(xml_data)
-              namespaces = {
-                  'atom': 'http://w3.org',
-                  'yt': 'http://youtube.com'
-              }
-              
-              videos = []
-              # Extract details for each recent upload entry
-              for entry in root.findall('atom:entry', namespaces):
-                  video_id = entry.find('yt:videoId', namespaces).text
-                  title = entry.find('atom:title', namespaces).text
-                  link = entry.find('atom:link', namespaces).attrib['href']
-                  
-                  videos.append({
-                      'id': video_id,
-                      'title': title,
-                      'link': link
-                  })
-              
-              # Build the _data directory if missing and save a clean JSON structure
-              os.makedirs('_data', exist_ok=True)
-              with open('_data/youtube.json', 'w', encoding='utf-8') as f:
-                  json.dump(videos, f, ensure_ascii=False, indent=2)
-              print('Successfully generated _data/youtube.json data payload.')
-          except Exception as e:
-              print(f'Critical parsing failure encountered: {e}')
-              exit(1)
-          "
+      - name: Fetch and Parse YouTube Feed via Python File
+        run: python fetch_youtube.py # Clean execution without YAML script string issues
 
       - name: Commit and Push Data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Automated Update: Synced latest YouTube videos via correct feed URL structure'
+          commit_message: 'Automated Update: Synced latest YouTube videos via stable external python file'
           file_pattern: '_data/youtube.json'
