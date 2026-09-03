@@ -3,18 +3,10 @@ import os
 import subprocess
 import sys
 
-# Your verified YouTube channel identifier string
-CHANNEL_ID = "UCpAoQMXFb5Zq7d7egXOjveg"
-
-# Hidden YouTube Playlist Structural Transformations:
-# UULF points directly to your long-form public uploads feed only
-# UUSH points directly to your dedicated YouTube Shorts feed only
-long_form_playlist_id = CHANNEL_ID.replace("UC", "UULF", 1)
-shorts_playlist_id = CHANNEL_ID.replace("UC", "UUSH", 1)
-
+# TARGET MATCH: Direct, hardcoded layout links targeting your specific streams natively
 targets = {
-    "youtube": f"https://youtube.com{long_form_playlist_id}",
-    "shorts": f"https://youtube.com{shorts_playlist_id}"
+    "youtube": "https://youtube.com",
+    "shorts": "https://youtube.com"
 }
 
 try:
@@ -45,7 +37,7 @@ try:
                 videos.append({
                     "id": video_id,
                     "title": data.get("title", ""),
-                    "link": f"https://youtube.com{video_id}"
+                    "link": f"https://youtube.com/{video_id}"
                 })
         
         # Save the dataset to its respective json file
