@@ -22,21 +22,37 @@ title: home
   
   /* Restores explicit widescreen boundaries to prevent layout stretching */
   .thumbnail-wrapper {
-    position: relative;
-    width: 100%;
+    position: relative !important;
+    width: 100% !important;
     padding-top: 56.25% !important;
-    background: #000;
+    background: #000 !important;
     display: block !important;
+    overflow: hidden !important;
   }
   
   .short-thumbnail-wrapper {
-    position: relative;
-    width: 100%;
+    position: relative !important;
+    width: 100% !important;
     padding-top: 177.77% !important;
-    background: #000;
+    background: #000 !important;
     display: block !important;
+    overflow: hidden !important;
+  }
+
+  /* CRITICAL CORRECTION: Forces the images to pin directly to the top edges */
+  .thumbnail-wrapper img,
+  .short-thumbnail-wrapper img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 </style>
+
 
 <h3 class="feed-title">Latest Videos</h3>
 <div class="video-grid">
