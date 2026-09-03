@@ -20,15 +20,12 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Video Extraction Packages
-        # THIS IS THE CRITICAL MISSING STEP: Installs the yt-dlp engine onto the Linux runner
-        run: pip install yt-dlp
-
       - name: Fetch and Parse YouTube Feed via Python File
-        run: python fetch_youtube.py
+        run: python fetch_youtube.py # Clean native compilation step
 
       - name: Commit and Push Data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Automated Update: Synced latest YouTube longform and shorts feeds'
           file_pattern: '_data/*.json'
+
