@@ -1,45 +1,46 @@
-import urllib.request
-import xml.etree.ElementTree as ET
 import json
 import os
+import subprocess
 import sys
 
-url = 'https://youtube.com'
-
-# Desktop browser mask to guarantee YouTube serves raw XML data
-req = urllib.request.Request(
-    url, 
-    headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
-)
+# Your verified YouTube channel identifier string
+CHANNEL_ID = "UCmK_fO3S_xS96w95f5_tIug"
+url = f"https://youtube.com{CHANNEL_ID}"
 
 try:
-    response = urllib.request.urlopen(req)
-    xml_data = response.read()
+    print(f"Extracting video list from: {url}")
     
-    root = ET.fromstring(xml_data)
-    namespaces = {
-        'atom': 'http://w3.org',
-        'yt': 'http://youtube.com'
-    }
+    # Execute a clean command to fetch metadata for your last 5 uploads
+    cmd = [
+        "yt-dlp",
+        "--playlist-end", "5",
+        "--dump-json",
+        "--flat-playlist",
+        url
+    ]
+    
+    result = subprocess.run(cmd, capture_output=True, text=True, check=True)
     
     videos = []
-    for entry in root.findall('atom:entry', namespaces):
-        video_id = entry.find('yt:videoId', namespaces).text
-        title = entry.find('atom:title', namespaces).text
-        link = entry.find('atom:link', namespaces).attrib['href']
+    # Parse the output metadata streams
+    for line in result.stdout.strip().split("\n"):
+        if not line:
+            continue
+        data = json.loads(line)
         
         videos.append({
-            'id': video_id,
-            'title': title,
-            'link': link
+            "id": data.get("id"),
+            "title": data.get("title"),
+            "link": f"https://www.youtube.com/watch?v={data.get('id')}"
         })
-    
-    os.makedirs('_data', exist_ok=True)
-    with open('_data/youtube.json', 'w', encoding='utf-8') as f:
+        
+    # Build your data folders and export clean JSON structures
+    os.makedirs("_data", exist_ok=True)
+    with open("_data/youtube.json", "w", encoding="utf-8") as f:
         json.dump(videos, f, ensure_ascii=False, indent=2)
         
-    print("Successfully generated _data/youtube.json")
-    
+    print("Successfully built _data/youtube.json data entries.")
+
 except Exception as e:
-    print(f"Critical parsing failure encountered: {e}")
+    print(f"Critical execution block dropped: {e}")
     sys.exit(1)
