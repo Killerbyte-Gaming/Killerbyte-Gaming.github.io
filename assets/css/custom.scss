@@ -1,11 +1,24 @@
 ---
 ---
+/* Update your standard video grid section */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  /* Reduced from minmax(250px, 1fr) to 180px to squeeze more cards per row */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
   margin-top: 20px;
 }
+
+/* Update your vertical Shorts grid section */
+.shorts-grid {
+  display: grid;
+  /* Reduced from minmax(160px, 1fr) to 120px for smaller smartphone-proportioned cards */
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
 
 .video-card {
   background: #151515;
