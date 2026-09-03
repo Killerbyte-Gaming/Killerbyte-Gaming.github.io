@@ -4,12 +4,10 @@ import sys
 import urllib.request
 import xml.etree.ElementTree as ET
 
-# TARGET PATH: Explicitly hardcoded to the clean RSS gate endpoint
-url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCpAoQMXFb5Zq7d7egXOjveg"
+url = "https://youtube.com"
 
 print(f"Connecting natively to clean RSS endpoint: {url}")
 
-# Disguise the request as a mobile browser to bypass datacenter blocks
 req = urllib.request.Request(
     url,
     headers={
@@ -21,7 +19,11 @@ try:
     response = urllib.request.urlopen(req, timeout=15)
     xml_data = response.read()
     
-    # Parse the XML payload using the official global YouTube schemas
+    # DIAGNOSTIC PRINT: Show exactly what YouTube is returning in the terminal logs
+    print("--- RAW YOUTUBE RSS FEED OUTPUT START ---")
+    print(xml_data.decode('utf-8')[:2000]) # Prints the first 2000 characters
+    print("--- RAW YOUTUBE RSS FEED OUTPUT END ---")
+    
     root = ET.fromstring(xml_data)
     namespaces = {
         'atom': 'http://w3.org',
@@ -31,8 +33,10 @@ try:
     long_form_videos = []
     shorts_videos = []
     
-    # Loop through each upload entry in the feed
-    for entry in root.findall('atom:entry', namespaces):
+    entries = root.findall('atom:entry', namespaces)
+    print(f"Found {len(entries)} total entries in the XML feed.")
+    
+    for entry in entries:
         video_id = entry.find('yt:videoId', namespaces).text
         title = entry.find('atom:title', namespaces).text
         link = entry.find('atom:link', namespaces).attrib['href']
@@ -43,13 +47,11 @@ try:
             "link": link
         }
         
-        # Categorise into shorts if the title contains short-form tracking tags
         if "#shorts" in title.lower() or "short" in title.lower():
             shorts_videos.append(video_entry)
         else:
             long_form_videos.append(video_entry)
             
-    # Keep the counts clean to match your front-end spacing
     long_form_videos = long_form_videos[:6]
     shorts_videos = shorts_videos[:6]
         
