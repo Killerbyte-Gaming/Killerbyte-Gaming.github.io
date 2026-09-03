@@ -31,7 +31,6 @@ jobs:
           import subprocess
           import sys
 
-          # STITCHED URL BLOCKS: Completely bypasses GitHub's text-matching secret filters
           domain_chunk = "https://www." + "youtube.com"
           path_chunk = "/channel/"
           id_chunk = "UCpAoQMXFb5Zq7d7egXOjveg"
@@ -40,7 +39,7 @@ jobs:
           print(f"Connecting securely via extraction layer to: {url}")
           
           try:
-              # Fetch the last 15 uploads with their duration parameters included
+              # Fetch the last 15 uploads
               cmd = [
                   "yt-dlp",
                   "--playlist-end", "15",
@@ -54,7 +53,6 @@ jobs:
               long_form_videos = []
               shorts_videos = []
               
-              # Loop through each item in the raw metadata payload
               for line in result.stdout.strip().split("\n"):
                   if not line:
                       continue
@@ -62,23 +60,36 @@ jobs:
                   
                   video_id = data.get("id")
                   title = data.get("title", "")
-                  duration = data.get("duration") # Duration is returned in seconds
                   
+                  # Look closely at how yt-dlp classifies the original URL track
+                  # In modern versions, flat-playlist items still contain metadata anchors 
+                  # or can be evaluated by checking their layout properties natively.
                   video_entry = {
                       "id": video_id,
                       "title": title,
                       "link": f"https://youtube.com{video_id}"
                   }
                   
-                  # Sort videos cleanly based on length parameters
-                  if duration and duration <= 60:
-                      shorts_videos.append(video_entry)
-                  elif "#shorts" in title.lower() or "short" in title.lower():
+                  # AIR-TIGHT EXTRACTION DETECTOR:
+                  # If yt-dlp flagged the item or if we verify it against title/original layouts,
+                  # we separate them. Let's run a fallback look for vertical configurations.
+                  is_short = False
+                  
+                  # Check if the title text fields explicitly register your shorts pattern flags
+                  if "#shorts" in title.lower() or "shorts" in title.lower():
+                      is_short = True
+                  # Safe capture: If you want to explicitly separate them, we can also look at video paths
+                  elif data.get("ie_key") == "YoutubeShorts" or "/shorts/" in data.get("url", ""):
+                      is_short = True
+                      
+                  if is_short:
+                      # Switch link to use vertical shorts layout wrapper format for clean routing
+                      video_entry["link"] = f"https://youtube.com{video_id}"
                       shorts_videos.append(video_entry)
                   else:
                       long_form_videos.append(video_entry)
                       
-              # Cap both arrays to match your website layout spacing limits
+              # Cap both arrays neatly for your website layout spacing limits
               long_form_videos = long_form_videos[:6]
               shorts_videos = shorts_videos[:6]
                   
@@ -94,12 +105,9 @@ jobs:
 
           except Exception as e:
               print(f"Critical data extraction block failed: {e}")
-              if hasattr(e, 'stderr') and e.stderr:
-                  print(f"Details: {e.stderr}")
               sys.exit(1)
           EOF
           python process_media.py
-
 
       - name: Commit and Save Data Packages
         uses: stefanzweifel/git-auto-commit-action@v5
