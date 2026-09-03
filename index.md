@@ -51,6 +51,55 @@ title: home
     margin: 0 !important;
     padding: 0 !important;
   }
+
+    /* Social Link Container Settings */
+  .social-link-block {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    margin-top: 20px !important;
+    margin-bottom: 50px !important;
+  }
+
+  /* Base Button Styling Parameters */
+  .social-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 10px 20px !important;
+    font-weight: bold !important;
+    font-size: 0.9rem !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    border: 1px solid transparent !important;
+    transition: all 0.2s ease-in-out !important;
+  }
+
+  /* YouTube Red Style Identity Accent */
+  .youtube-btn {
+    background-color: #1a0000 !important;
+    color: #ff4e4e !important;
+    border-color: #ff1a1a !important;
+  }
+  .youtube-btn:hover {
+    background-color: #ff1a1a !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(255, 26, 26, 0.3) !important;
+  }
+
+  /* Twitter / X Dark Sleek Style Accent */
+  .twitter-btn {
+    background-color: #0f1419 !important;
+    color: #1da1f2 !important;
+    border-color: #1da1f2 !important;
+  }
+  .twitter-btn:hover {
+    background-color: #1da1f2 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3) !important;
+  }
+
 </style>
 
 
@@ -84,4 +133,15 @@ title: home
       </a>
     </div>
   {% endfor %}
+</div>
+
+<h3 class="feed-title">Connect with Killerbyte Gaming</h3>
+<div class="social-link-block">
+  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn youtube-btn">
+    YouTube
+  </a>
+  <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-btn twitter-btn">
+    Twitter / X
+  </a>
+  <!-- You can duplicate this line below to add Twitch, Discord, etc. -->
 </div>
