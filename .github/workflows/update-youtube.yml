@@ -20,80 +20,50 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Fetch and Parse YouTube Feed (Inline Python Script)
-        run: |
+      - name: Fetch and Parse YouTube Feed
+        run: >-
           python -c "
-          import urllib.request
-          import xml.etree.ElementTree as ET
-          import json
-          import os
-          import sys
-
-          # DEFINITIVE URL DESTINATION GATEWAY
-          url = 'https://youtube.com'
-          print('Connecting natively to clean RSS endpoint: ' + url)
-
-          req = urllib.request.Request(
-              url,
-              headers={'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36'}
-          )
-
+          import urllib.request;
+          import xml.etree.ElementTree as ET;
+          import json;
+          import os;
+          import sys;
+          url = 'https://youtube.com';
+          print('Connecting natively to clean RSS endpoint: ' + url);
+          req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36'});
           try:
-              response = urllib.request.urlopen(req, timeout=15)
-              xml_data = response.read()
-              
-              root = ET.fromstring(xml_data)
-              
-              # FIXED: Updated namespace tracking links to align perfectly with YouTube's core feed layout rules
-              namespaces = {
-                  'atom': 'http://w3.org',
-                  'yt': 'http://youtube.com'
-              }
-              
-              long_form_videos = []
-              shorts_videos = []
-              
-              # Find all upload entries under the global root container
-              entries = root.findall('atom:entry', namespaces)
-              print('Found ' + str(len(entries)) + ' total entries in the XML feed.')
-              
+              response = urllib.request.urlopen(req, timeout=15);
+              xml_data = response.read();
+              root = ET.fromstring(xml_data);
+              namespaces = {'atom': 'http://w3.org', 'yt': 'http://youtube.com'};
+              long_form_videos = [];
+              shorts_videos = [];
+              entries = root.findall('atom:entry', namespaces);
+              print('Found ' + str(len(entries)) + ' total entries in the XML feed.');
               for entry in entries:
-                  video_id = entry.find('yt:videoId', namespaces).text
-                  title = entry.find('atom:title', namespaces).text
-                  link = entry.find('atom:link', namespaces).attrib['href']
-                  
-                  video_entry = {
-                      'id': video_id,
-                      'title': title,
-                      'link': link
-                  }
-                  
-                  # Classifies items into shorts if the text matches your upload keywords or description parameters
+                  video_id = entry.find('yt:videoId', namespaces).text;
+                  title = entry.find('atom:title', namespaces).text;
+                  link = entry.find('atom:link', namespaces).attrib['href'];
+                  video_entry = {'id': video_id, 'title': title, 'link': link};
                   if '#shorts' in title.lower() or 'short' in title.lower():
-                      shorts_videos.append(video_entry)
+                      shorts_videos.append(video_entry);
                   else:
-                      long_form_videos.append(video_entry)
-                      
-              long_form_videos = long_form_videos[:6]
-              shorts_videos = shorts_videos[:6]
-                  
-              os.makedirs('_data', exist_ok=True)
-              
+                      long_form_videos.append(video_entry);
+              long_form_videos = long_form_videos[:6];
+              shorts_videos = shorts_videos[:6];
+              os.makedirs('_data', exist_ok=True);
               with open('_data/youtube.json', 'w', encoding='utf-8') as f:
-                  json.dump(long_form_videos, f, ensure_ascii=False, indent=2)
-                  
+                  json.dump(long_form_videos, f, ensure_ascii=False, indent=2);
               with open('_data/shorts.json', 'w', encoding='utf-8') as f:
-                  json.dump(shorts_videos, f, ensure_ascii=False, indent=2)
-                  
-              print('SUCCESS: Generated youtube.json (' + str(len(long_form_videos)) + ') and shorts.json (' + str(len(shorts_videos)) + ')!')
+                  json.dump(shorts_videos, f, ensure_ascii=False, indent=2);
+              print('SUCCESS: Both files generated cleanly!');
           except Exception as e:
-              print('Critical parsing failure encountered: ' + str(e))
-              sys.exit(1)
+              print('Critical parsing failure encountered: ' + str(e));
+              sys.exit(1);
           "
-
 
       - name: Commit and Push Data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Automated Update: Synced latest YouTube longform and shorts datasets via inline script'
+          commit_message: 'Automated Update: Synced latest YouTube datasets via inline flat layout'
           file_pattern: '_data/*.json'
