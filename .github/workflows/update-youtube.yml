@@ -28,13 +28,21 @@ jobs:
           import json
           import os
 
-          url = 'https://youtube.com/channel/UCpAoQMXFb5Zq7d7egXOjveg'
+          # CORRECT PATH: Point directly to the official RSS feed using your Channel ID
+          url = 'https://youtube.com'
+          
+          # Add a desktop browser header to bypass automated traffic filters
+          req = urllib.request.Request(
+              url, 
+              headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+          )
+
           try:
-              # Securely grab the raw XML feed over HTTPS
-              response = urllib.request.urlopen(url)
+              # Download the actual raw XML data stream
+              response = urllib.request.urlopen(req)
               xml_data = response.read()
               
-              # Parse the XML payload safely handling namespaces
+              # Parse the XML payload using the official global YouTube schemas
               root = ET.fromstring(xml_data)
               namespaces = {
                   'atom': 'http://w3.org',
@@ -42,7 +50,7 @@ jobs:
               }
               
               videos = []
-              # Extract details for each recent upload
+              # Extract details for each recent upload entry
               for entry in root.findall('atom:entry', namespaces):
                   video_id = entry.find('yt:videoId', namespaces).text
                   title = entry.find('atom:title', namespaces).text
@@ -54,7 +62,7 @@ jobs:
                       'link': link
                   })
               
-              # Build the _data directory if missing and drop clean JSON entries
+              # Build the _data directory if missing and save a clean JSON structure
               os.makedirs('_data', exist_ok=True)
               with open('_data/youtube.json', 'w', encoding='utf-8') as f:
                   json.dump(videos, f, ensure_ascii=False, indent=2)
@@ -67,5 +75,5 @@ jobs:
       - name: Commit and Push Data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Automated Update: Synced latest YouTube videos via internal python step'
+          commit_message: 'Automated Update: Synced latest YouTube videos via correct feed URL structure'
           file_pattern: '_data/youtube.json'
