@@ -8,7 +8,7 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
 
 ### Latest Videos
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px;" markdown="0">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); justify-content: center; gap: 15px; margin-top: 15px;" markdown="0">
   {% for video in site.data.youtube limit: 3 %}
     <div style="border: 1px solid var(--card-border-color); border-radius: 6px; overflow: hidden; background: #000; padding: 10px;">
       <!-- REMOVED LINK: The image container now renders as a standard standalone graphic element -->
@@ -26,7 +26,7 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
 
 ### Latest Shorts
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 15px;" markdown="0">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); justify-content: center; gap: 12px; margin-top: 15px;" markdown="0">
   {% for short in site.data.shorts limit: 4 %}
     <div style="border: 1px solid var(--card-border-color); border-radius: 6px; overflow: hidden; background: #000; padding: 10px;">
       <!-- REMOVED LINK: The portrait image wrapper now scales as a purely visual thumbnail frame -->
