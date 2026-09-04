@@ -27,9 +27,9 @@ My primary creative outlet centers around gaming and community engagement. Over 
 
 Outside of gaming, I have a deep-seated foundation in technology, programming, and web infrastructure. 
 
-* **Education:** I hold a **Bachelor of Information Technology with Honours** from *Griff Griffith University* (Class of 2014).
+* **Education:** I hold a **Bachelor of Information Technology with Honours** from *Griffith University* (Class of 2015).
 * **Research Focus:** During my time at university, my honours research specialized deeply in **wireless sensor network localization optimization systems**.
-* **Technical Skills:** I enjoy using my background to build, automate, and tinker with modern digital workflows—ranging from managing Python-based data-mining automation scrapers to customizing responsive, optimized front-end layout architectures right here on Jekyll.
+* **Technical Skills:** I enjoy using my background to build, automate, and tinker with different facets of technology. Whether it be the latest piece of software or even tinkering with some electronics projects with Arduinos and Raspberry Pis.
 
 ---
 
