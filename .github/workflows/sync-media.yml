@@ -67,7 +67,7 @@ jobs:
                   video_entry = {
                       "id": video_id,
                       "title": title,
-                      "link": f"https://youtube.com{video_id}"
+                      "link": f"https://youtube.com/{video_id}"
                   }
                   
                   # AIR-TIGHT EXTRACTION DETECTOR:
@@ -84,7 +84,7 @@ jobs:
                       
                   if is_short:
                       # Switch link to use vertical shorts layout wrapper format for clean routing
-                      video_entry["link"] = f"https://youtube.com{video_id}"
+                      video_entry["link"] = f"https://youtube.com/{video_id}"
                       shorts_videos.append(video_entry)
                   else:
                       long_form_videos.append(video_entry)
