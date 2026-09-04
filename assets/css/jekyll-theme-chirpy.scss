@@ -1,0 +1,31 @@
+/* -------------------------------------------------- */
+/* Killerbyte Gaming - Deep Red Core Theme Overrides  */
+/* -------------------------------------------------- */
+
+/* Forces variables directly onto the theme's dark-mode framework core */
+html[data-theme='dark'] {
+  /* Core Accent Color Parameters */
+  --link-color: #ff3333 !important;               /* Vibrant red for text hyperlinks */
+  --link-underline-color: #cc0000 !important;     /* Deep crimson hover underlines */
+  --main-bg: #0f0c0c !important;                  /* Stark obsidian backdrop with a faint red tint */
+  --page-bg: #141111 !important;                  /* Central content panel canvas shade */
+  
+  /* Sidebar and Navigation Accents */
+  --sidebar-bg: #0a0808 !important;               /* Ultra-dark sidebar foundation layer */
+  --sidebar-muted-color: #8a7373 !important;      /* Soft rose-grey for non-active text */
+  --sidebar-active-color: #ff1a1a !important;     /* Bright red highlighter for active menu states */
+  --nav-cursor-color: #cc0000 !important;         /* Crimson trailing border for selection highlights */
+  
+  /* Card Envelopes and UI Elements */
+  --card-bg: #1c1717 !important;                  /* Subtle charcoal-red container boxes */
+  --card-border-color: #382929 !important;        /* Thin crimson-grey structural boundaries */
+  
+  /* Layout Typography Settings */
+  --text-color: #f5ebeb !important;               /* High-visibility clean off-white text headers */
+  --text-muted-color: #a39292 !important;          /* Muted text blocks */
+  --heading-color: #ff3333 !important;            /* Forces title tags (###) to inherit your red look */
+  
+  /* Scrollbar and custom interface assets */
+  --scrollbar-color: #4a1414 !important;
+  --scrollbar-hover-color: #7a1f1f !important;
+}
