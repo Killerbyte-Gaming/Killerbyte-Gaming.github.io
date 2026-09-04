@@ -1,9 +1,0 @@
-# Left sidebar navigation panel node matrix settings
-- title: Home
-  url: /
-  icon: fas fa-home
-
-- title: Blog Logs
-  url: /tabs/blog/
-  icon: fas fa-newspaper # Sleek newspaper icon matching the Chirpy profile style
-
