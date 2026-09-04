@@ -44,20 +44,42 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
 
 ### Connect with Killerbyte Gaming
 
+<!-- FIXED: Custom inline styles to force a beautiful, unified deep red palette across all platform buttons -->
 <div class="d-flex flex-wrap gap-2 my-3" markdown="0" style="position: relative; z-index: 10; clear: both !important;">
-  <a href="https://youtube.com/@killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-outline-danger btn-sm font-weight-bold">
+  <style>
+    /* Global class for your unified red gaming button aesthetic */
+    .btn-gamer-red {
+      background-color: #0f0c0c !important;
+      color: #ff3333 !important;
+      border: 1px solid #382929 !important;
+      font-weight: bold !important;
+      transition: all 0.2s ease-in-out !important;
+    }
+    
+    /* Active hover animation with a clean crimson glow effect */
+    .btn-gamer-red:hover {
+      background-color: #ff3333 !important;
+      color: #0f0c0c !important;
+      border-color: #ff3333 !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 12px rgba(255, 51, 51, 0.4) !important;
+    }
+  </style>
+
+  <a href="https://youtube.com/@killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-gamer-red btn-sm">
     YouTube
   </a>
-  <a href="https://x.com/killerbytegame" target="_blank" rel="noopener noreferrer" class="btn btn-outline-info btn-sm font-weight-bold">
+  <a href="https://x.com/killerbytegame" target="_blank" rel="noopener noreferrer" class="btn btn-gamer-red btn-sm">
     Twitter / X
   </a>
-  <a href="https://twitch.tv/killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm font-weight-bold" style="color: #9146ff !important; border-color: #9146ff !important;">
+  <a href="https://twitch.tv/killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-gamer-red btn-sm">
     Twitch
   </a>
-  <a href="https://tiktok.com/killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm font-weight-bold" style="color: #25f4ee !important; border-color: #fe2c55 !important;">
+  <a href="https://tiktok.com/killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-gamer-red btn-sm">
     TikTok
   </a>
-  <a href="https://instagram.com/killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-outline-warning btn-sm font-weight-bold" style="color: #e1306c !important; border-color: #f77737 !important;">
+  <a href="https://instagram.com/killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-gamer-red btn-sm">
     Instagram
   </a>
 </div>
+
