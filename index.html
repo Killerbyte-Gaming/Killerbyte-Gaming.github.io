@@ -4,16 +4,15 @@ title: Home
 title_hidden: true
 ---
 
-Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS) gameplay videos, progression guides, and short clips synced straight from my content channels below!
+<p>Welcome to <strong>Killerbyte Gaming</strong>. Check out my latest Old School RuneScape (OSRS) gameplay videos, progression guides, and short clips synced straight from my content channels below!</p>
 
-### Latest Videos
+<h3 style="margin-top: 30px; margin-bottom: 15px; font-weight: 700;">Latest Videos</h3>
 
-<div class="row row-cols-1 row-cols-md-3 g-3 my-2" markdown="0">
+<div class="row row-cols-1 row-cols-md-3 g-3 my-2">
   {% for video in site.data.youtube limit: 3 %}
     <div class="col">
       <div class="h-100 p-0 position-relative" style="background: none !important;">
         <a href="https://youtube.com/{{ video.id }}" target="_blank" rel="noopener noreferrer" class="d-block text-decoration-none h-100">
-          <!-- FIXED: Locked into a precise 16:9 widescreen ratio frame -->
           <div style="position: relative; width: 100%; padding-top: 56.25%; border: 1px solid var(--card-border-color) !important; border-radius: 6px; overflow: hidden; background: #000;">
             <img src="https://i.ytimg.com/vi/{{ video.id }}/hqdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; margin: 0; padding: 0;" alt="{{ video.title | escape }}">
           </div>
@@ -26,11 +25,9 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
   {% endfor %}
 </div>
 
-<br>
+<h3 style="margin-top: 40px; margin-bottom: 15px; font-weight: 700;">Latest Shorts</h3>
 
-### Latest Shorts
-
-<div class="row row-cols-2 row-cols-md-4 g-2 my-2" markdown="0">
+<div class="row row-cols-2 row-cols-md-4 g-2 my-2">
   {% for short in site.data.shorts limit: 4 %}
     <div class="col">
       <div class="h-100 p-0 position-relative" style="background: none !important;">
@@ -47,10 +44,7 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
   {% endfor %}
 </div>
 
-<!-- FIXED: Injected a structural clearfix block to push the social buttons down -->
-<div class="clearfix" style="clear: both !important; height: 20px;"></div>
-
-### Connect with Killerbyte Gaming
+<h3 style="margin-top: 40px; margin-bottom: 15px; font-weight: 700;">Connect with Killerbyte Gaming</h3>
 
 <div class="d-flex flex-wrap gap-2 my-3" markdown="0" style="position: relative; z-index: 10; clear: both !important;">
   <a href="https://youtube.com/@killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-outline-danger btn-sm font-weight-bold">
