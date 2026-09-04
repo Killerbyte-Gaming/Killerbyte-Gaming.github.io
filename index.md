@@ -8,18 +8,14 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
 
 ### Latest Videos
 
-<!-- markdown="0" stops the Jekyll engine from breaking apart your hyper-link anchors -->
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px;" markdown="0">
   {% for video in site.data.youtube limit: 3 %}
-    <div style="position: relative; display: block;">
-      <a href="https://youtube.com/{{ video.id }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; display: block;">
-        <div style="position: relative; width: 100%; padding-top: 56.25%; border: 1px solid var(--card-border-color); border-radius: 6px; overflow: hidden; background: #000;">
-          <img src="https://i.ytimg.com/vi/{{ video.id }}/hqdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; margin: 0; padding: 0; display: block;" alt="{{ video.title | escape }}">
-        </div>
-        <div style="padding-top: 8px;">
-          <h6 style="font-size: 0.9rem; line-height: 1.4; color: var(--text-color) !important; font-weight: 600; margin: 0; text-decoration: none !important;">{{ video.title }}</h6>
-        </div>
-      </a>
+    <div style="border: 1px solid var(--card-border-color); border-radius: 6px; overflow: hidden; background: #000; padding: 10px;">
+      <!-- NATIVE LINK: Pure markdown link ensures images stay fully clickable -->
+      [![{{ video.title | escape }}](https://i.ytimg.com/vi/{{ video.id }}/hqdefault.jpg)](https://youtube.com{{ video.id }})
+      <div style="padding-top: 8px;">
+        <a href="https://youtube.com{{ video.id }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.9rem; line-height: 1.4; color: var(--text-color) !important; font-weight: 600; margin: 0; text-decoration: none !important; display: block;">{{ video.title }}</a>
+      </div>
     </div>
   {% endfor %}
 </div>
@@ -30,15 +26,15 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 15px;" markdown="0">
   {% for short in site.data.shorts limit: 4 %}
-    <div style="position: relative; display: block;">
-      <a href="https://youtube.com/{{ short.id }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; display: block;">
-        <div style="position: relative; width: 100%; padding-top: 177.77%; border: 1px solid var(--card-border-color); border-radius: 6px; overflow: hidden; background: #000;">
-          <img src="https://i.ytimg.com/vi/{{ short.id }}/hqdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; margin: 0; padding: 0; display: block;" alt="{{ short.title | escape }}">
-        </div>
-        <div style="padding-top: 8px;">
-          <h6 style="font-size: 0.8rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--text-color) !important; margin: 0; text-decoration: none !important;">{{ short.title }}</h6>
-        </div>
-      </a>
+    <div style="border: 1px solid var(--card-border-color); border-radius: 6px; overflow: hidden; background: #000; padding: 10px;">
+      <div style="position: relative; width: 100%; padding-top: 177.77%; overflow: hidden;">
+        <a href="https://youtube.com{{ short.id }}" target="_blank" rel="noopener noreferrer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;">
+          <img src="https://i.ytimg.com/vi/{{ short.id }}/hqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover; margin: 0; padding: 0; display: block;" alt="{{ short.title | escape }}">
+        </a>
+      </div>
+      <div style="padding-top: 8px;">
+        <a href="https://youtube.com{{ short.id }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.8rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--text-color) !important; margin: 0; text-decoration: none !important;">{{ short.title }}</a>
+      </div>
     </div>
   {% endfor %}
 </div>
