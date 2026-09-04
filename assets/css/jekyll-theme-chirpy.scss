@@ -4,20 +4,30 @@
 
 @import 'main.bundle';
 
-html[data-theme='dark'] {
+/* CHIRPY NATIVE CORE OVERRIDES: Overwriting the root variables directly */
+:root {
+  /* Core Accent Color Parameters */
   --link-color: #ff3333 !important;
   --link-underline-color: #cc0000 !important;
   --main-bg: #0f0c0c !important;
   --page-bg: #141111 !important;
+  
+  /* Sidebar and Navigation Accents */
   --sidebar-bg: #0a0808 !important;
   --sidebar-muted-color: #8a7373 !important;
   --sidebar-active-color: #ff1a1a !important;
   --nav-cursor-color: #cc0000 !important;
+  
+  /* Card Envelopes and UI Elements */
   --card-bg: #1c1717 !important;
   --card-border-color: #382929 !important;
+  
+  /* Layout Typography Settings */
   --text-color: #f5ebeb !important;
   --text-muted-color: #a39292 !important;
   --heading-color: #ff3333 !important;
+  
+  /* Interface Assets */
   --scrollbar-color: #4a1414 !important;
   --scrollbar-hover-color: #7a1f1f !important;
 }

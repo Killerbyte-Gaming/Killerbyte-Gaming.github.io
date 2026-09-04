@@ -8,6 +8,7 @@ baseurl: ""
 
 # Theme Activation Settings
 theme: jekyll-theme-chirpy
+theme_mode: dark
 
 # Personal Sidebar Customisation Profile
 author:
