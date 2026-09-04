@@ -1,0 +1,4 @@
+en:
+  tabs:
+    home: "Home"
+    blog: "Blog Logs" # Maps the lowercase file title straight to your display layout text
