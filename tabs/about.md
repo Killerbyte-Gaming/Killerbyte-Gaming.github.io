@@ -8,7 +8,7 @@ permalink: /about/
 
 <!-- OPTIONAL: Pulls your local avatar photo into a crisp profile header display block -->
 <div class="text-center my-4" markdown="0">
-  <img src="/assets/img/avatar.jpg" class="rounded-circle shadow-sm" style="width: 140px; height: 140px; object-fit: cover; border: 2px solid var(--card-border-color);" alt="Killerbyte Gaming Avatar">
+  <img src="/assets/img/Wave 512.png" class="rounded-circle shadow-sm" style="width: 140px; height: 140px; object-fit: cover; border: 2px solid var(--card-border-color);" alt="Killerbyte Gaming Avatar">
   <h2 class="mt-3" style="font-weight: 700; color: var(--text-color);">AJ Abotomey</h2>
   <p class="text-muted">Content Creator & Web Development Enthusiast</p>
 </div>
