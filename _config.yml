@@ -1,5 +1,7 @@
 title: Killerbyte Gaming
 tagline: Maxing as a PvM Noob & Content Hub
+# FIXED: The language hook forces Chirpy to map your data translation keys natively
+lang: en
 description: "Dynamic gaming hub featuring Old School RuneScape (OSRS) guides, gameplay videos, and content feeds."
 url: "https://github.io"
 baseurl: ""
