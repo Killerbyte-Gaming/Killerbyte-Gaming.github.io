@@ -16,7 +16,7 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
         <img src="https://i.ytimg.com/vi/{{ video.id }}/hqdefault.jpg" class="no-image-viewer w-100 h-100" style="object-fit: cover; display: block; margin: 0; padding: 0;" alt="{{ video.title | escape }}">
       </div>
       <div style="padding-top: 8px;">
-        <a href="https://youtube.com{{ video.id }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.9rem; line-height: 1.4; color: var(--text-color) !important; font-weight: 600; margin: 0; text-decoration: none !important; display: block;">{{ video.title }}</a>
+        <a href="https://youtube.com/{{ video.id }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.9rem; line-height: 1.4; color: var(--text-color) !important; font-weight: 600; margin: 0; text-decoration: none !important; display: block;">{{ video.title }}</a>
       </div>
     </div>
   {% endfor %}
@@ -34,7 +34,7 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
         <img src="https://i.ytimg.com/vi/{{ short.id }}/hqdefault.jpg" class="no-image-viewer w-100 h-100" style="object-fit: cover; display: block; margin: 0; padding: 0;" alt="{{ short.title | escape }}">
       </div>
       <div style="padding-top: 8px;">
-        <a href="https://youtube.com{{ short.id }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.8rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--text-color) !important; margin: 0; text-decoration: none !important;">{{ short.title }}</a>
+        <a href="https://youtube.com/{{ short.id }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.8rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--text-color) !important; margin: 0; text-decoration: none !important;">{{ short.title }}</a>
       </div>
     </div>
   {% endfor %}
