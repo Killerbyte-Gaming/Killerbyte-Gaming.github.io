@@ -12,9 +12,9 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
 {% for video in site.data.youtube limit: 3 %}
   <div class="col">
     <!-- SPAN BLOCK: Bypasses the Markdown link scraper and locks the navigation matrix together -->
-    <a href="https://youtube.com{{ video.id }}" target="_blank" rel="noopener noreferrer" class="d-block text-decoration-none h-100" style="background: none !important;">
+    <a href="https://youtube.com/{{ video.id }}" target="_blank" rel="noopener noreferrer" class="d-block text-decoration-none h-100" style="background: none !important;">
       <span class="d-block" style="border: 1px solid var(--card-border-color) !important; border-radius: 6px; overflow: hidden; background: #000;">
-        <img src="https://ytimg.com{{ video.id }}/hqdefault.jpg" style="width: 100%; display: block; margin: 0; padding: 0;" alt="{{ video.title | escape }}">
+        <img src="https://i.ytimg.com/vi/{{ video.id }}/hqdefault.jpg" style="width: 100%; display: block; margin: 0; padding: 0;" alt="{{ video.title | escape }}">
       </span>
       <span class="d-block pt-2">
         <h6 style="font-size: 0.9rem; line-height: 1.4; color: var(--text-color) !important; font-weight: 600; margin: 0;">{{ video.title }}</h6>
@@ -29,10 +29,10 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
 <div class="row row-cols-2 row-cols-md-4 g-2 my-2">
 {% for short in site.data.shorts limit: 4 %}
   <div class="col">
-    <a href="https://youtube.com{{ short.id }}" target="_blank" rel="noopener noreferrer" class="d-block text-decoration-none h-100" style="background: none !important;">
+    <a href="https://youtube.com/{{ short.id }}" target="_blank" rel="noopener noreferrer" class="d-block text-decoration-none h-100" style="background: none !important;">
       <span class="d-block" style="border: 1px solid var(--card-border-color) !important; border-radius: 6px; overflow: hidden; background: #000;">
         <span class="d-block" style="position: relative; width: 100%; padding-top: 177.77%; overflow: hidden;">
-          <img src="https://ytimg.com{{ short.id }}/hqdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; margin: 0; padding: 0;" alt="{{ short.title | escape }}">
+          <img src="https://i.ytimg.com/vi/{{ short.id }}/hqdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; margin: 0; padding: 0;" alt="{{ short.title | escape }}">
         </span>
       </span>
       <span class="d-block pt-2">
