@@ -1,0 +1,31 @@
+/*
+  Killerbyte Gaming - Deep Red Accent Stylesheet
+  Overrides Chirpy's default dark mode variables
+*/
+
+@mixin buddy-dark {
+  /* Core Accent Color Parameters */
+  --link-color: #ff3333;               /* Vibrant red for text hyperlink connections */
+  --link-underline-color: #cc0000;     /* Deep crimson hover underlines */
+  --main-bg: #0f0c0c;                  /* Stark obsidian backdrop with a faint reddish tint */
+  --page-bg: #141111;                  /* Central content panel canvas shade */
+  
+  /* Sidebar and Navigation Accents */
+  --sidebar-bg: #0a0808;               /* Ultra-dark sidebar foundation layer */
+  --sidebar-muted-color: #8a7373;      /* Soft rose-grey for non-active text values */
+  --sidebar-active-color: #ff1a1a;     /* Bright red highlighter node for active menu states */
+  --nav-cursor-color: #cc0000;         /* Crimson trailing border for navigation selection highlights */
+  
+  /* Card Envelopes and UI Elements */
+  --card-bg: #1c1717;                  /* Subtle charcoal-red container boxes */
+  --card-border-color: #382929;        /* Thin crimson-grey structural boundaries */
+  
+  /* Layout Typography Settings */
+  --text-color: #f5ebeb;               /* High-visibility clean off-white text headers */
+  --text-muted-color: #a39292;         /* Muted text blocks */
+  --heading-color: #ff3333;            /* Forces title tags (###) to inherit your red theme look */
+  
+  /* Code blocks and syntax highlights styling */
+  --scrollbar-color: #4a1414;
+  --scrollbar-hover-color: #7a1f1f;
+}
