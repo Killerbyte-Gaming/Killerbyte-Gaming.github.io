@@ -1,10 +1,10 @@
 ---
+layout: post
 title: Welcome to the Killerbyte Gaming Feed!
 author: Killerbyte Gaming
 date: 2026-09-04 16:30:00 +1000
 categories: [Gaming, Announcements]
 tags: [osrs, content-creation, streaming]
-render_with_liquid: false
 ---
 
 Welcome to the official **Killerbyte Gaming** devlog track! 
