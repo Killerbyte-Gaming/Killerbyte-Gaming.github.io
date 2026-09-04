@@ -1,0 +1,49 @@
+<!--
+  The Sidebar layout template override for Chirpy
+-->
+
+<aside id="sidebar" class="d-flex flex-column align-items-end" lang="{{ site.lang }}">
+  <div class="profile-wrapper text-center">
+    <a href="{{ '/' | relative_url }}" id="avatar" class="rounded-circle no-image-viewer">
+      {% if site.author.avatar %}
+        <img src="{{ site.author.avatar | relative_url }}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+      {% endif %}
+    </a>
+
+    <h1 class="site-title">
+      <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    </h1>
+    <p class="site-tagline ps-4 pe-4">{{ site.tagline }}</p>
+  </div>
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0 pe-0 animate__animated animate__fadeInLeft">
+    <ul class="nav flex-column font-weight-bold" style="gap: 5px; list-style: none; padding-left: 20px;">
+      
+      <!-- Core Home Tab Button Navigation Element -->
+      <li class="nav-item {% if page.url == '/' %}active{% endif %}">
+        <a href="{{ '/' | relative_url }}" class="nav-link d-flex align-items-center" style="color: var(--text-color); gap: 10px; font-size: 0.95rem; text-decoration: none;">
+          <i class="fas fa-home fa-fw" style="width: 20px;"></i>
+          <span>Home</span>
+        </a>
+      </li>
+
+      <!-- LOCKED-IN: Forcing your custom Blog Logs tab right into the compilation map -->
+      <li class="nav-item {% if page.url contains '/posts/' or page.layout == 'home' %}active{% endif %}">
+        <a href="{{ '/tabs/blog/' | relative_url }}" class="nav-link d-flex align-items-center" style="color: var(--text-color); gap: 10px; font-size: 0.95rem; text-decoration: none;">
+          <i class="fas fa-newspaper fa-fw" style="width: 20px;"></i>
+          <span>Blog Logs</span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+
+  <!-- Built-in Automated Branding Social Icon Slots Footer Panel -->
+  <div class="sidebar-bottom d-flex flex-wrap align-items-center justify-content-center w-100 mt-auto">
+    {% for entry in site.author.socials %}
+      <a href="{{ entry.link }}" target="_blank" rel="noopener noreferrer" class="mx-2 my-1" style="color: var(--text-muted-color); font-size: 1.1rem;" title="{{ entry.name | capitalize }}">
+        <i class="fab fa-{{ entry.name }}"></i>
+      </a>
+    {% endfor %}
+  </div>
+</aside>

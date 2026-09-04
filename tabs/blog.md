@@ -1,7 +1,5 @@
 ---
 layout: home
-title: blog
-icon: fas fa-newspaper
-order: 2
+title: Blog Logs
 permalink: /tabs/blog/
 ---
