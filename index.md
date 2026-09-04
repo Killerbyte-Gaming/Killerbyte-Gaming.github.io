@@ -43,7 +43,7 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
 {% endfor %}
 </div>
 
-### Connect with Killerbyte Gaming
+### Connect with Killerbyte Gaming thru Socials
 
 <div class="d-flex flex-wrap gap-2 my-3">
   <a href="https://youtube.com/@killerbyte_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-outline-danger btn-sm font-weight-bold">
