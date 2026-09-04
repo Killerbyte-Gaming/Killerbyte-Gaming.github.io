@@ -3,7 +3,7 @@ layout: page
 title: about
 icon: fas fa-user
 order: 3
-permalink: /about/
+permalink: /tabs/about/
 ---
 
 <!-- OPTIONAL: Pulls your local avatar photo into a crisp profile header display block -->
