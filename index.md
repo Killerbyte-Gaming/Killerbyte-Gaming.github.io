@@ -15,7 +15,7 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
       <!-- FIXED: Wrapped the anchor tag around BOTH the image container and text title -->
       <a href="{{ video.link }}" target="_blank" rel="noopener noreferrer" class="d-block text-decoration-none transition-all">
         <div class="rounded overflow-hidden shadow-sm" style="border: 1px solid var(--card-border-color) !important;">
-          <img src="https://ytimg.com{{ video.id }}/hqdefault.jpg" class="img-fluid w-100 d-block" alt="{{ video.title | escape }}">
+          <img src="https://i.ytimg.com/vi/{{ video.id }}/hqdefault.jpg" class="img-fluid w-100 d-block" alt="{{ video.title | escape }}">
         </div>
         <div class="pt-2">
           <h6 class="mb-0" style="font-size: 0.9rem; line-height: 1.4; color: var(--text-color) !important; font-weight: 600;">{{ video.title }}</h6>
@@ -36,7 +36,7 @@ Welcome to **Killerbyte Gaming**. Check out my latest Old School RuneScape (OSRS
       <a href="{{ short.link }}" target="_blank" rel="noopener noreferrer" class="d-block text-decoration-none transition-all">
         <div class="rounded overflow-hidden shadow-sm" style="border: 1px solid var(--card-border-color) !important;">
           <div style="position: relative; width: 100%; padding-top: 177.77%; overflow: hidden; background: #000;">
-            <img src="https://ytimg.com{{ short.id }}/hqdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="{{ short.title | escape }}">
+            <img src="https://i.ytimg.com/vi/{{ short.id }}/hqdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="{{ short.title | escape }}">
           </div>
         </div>
         <div class="pt-2">
