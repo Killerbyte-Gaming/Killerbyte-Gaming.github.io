@@ -12,7 +12,7 @@ theme: jekyll-theme-chirpy
 # Personal Sidebar Customisation Profile
 author:
   name: Killerbyte Gaming
-  avatar: "/Wave 512.png" # Uses your first ep thumbnail as a temporary avatar
+  avatar: "/assets/img/Wave 512.png" # Uses your first ep thumbnail as a temporary avatar
   bio: "Content Creator | Tech Enthusiast"
   twitter: "killerbytegame"
   #github: "Killerbyte-Gaming"
