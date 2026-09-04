@@ -10,7 +10,7 @@ permalink: /tabs/about/
 <div class="text-center my-4" markdown="0">
   <img src="/assets/img/Wave 512.png" class="rounded-circle shadow-sm" style="width: 140px; height: 140px; object-fit: cover; border: 2px solid var(--card-border-color);" alt="Killerbyte Gaming Avatar">
   <h2 class="mt-3" style="font-weight: 700; color: var(--text-color);">AJ Abotomey</h2>
-  <p class="text-muted">Content Creator & Web Development Enthusiast</p>
+  <p class="text-muted">Old School Runescape Content Creator</p>
 </div>
 
 Welcome to my portfolio! I am a digital creator, tech enthusiast, and gamer building an interactive content hub for my online community. You can find me streaming or sharing clips across my core platforms under the handle **@killerbyte_gaming**.
